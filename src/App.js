@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import { useState } from 'react';
 import Item from './components/Item';
@@ -20,10 +19,7 @@ function App() {
       return;
     }
 
-    const novaLista = [];
-    lista.forEach((item) => {
-      novaLista.push(item);
-    });
+    const novaLista = lista;
     const obj = {
       prioridade: prioridade[select],
       descricao: valor
@@ -36,6 +32,14 @@ function App() {
     if(msg != null)
       setMsg(null);
   };
+
+  const removerTarefa = (i) => {
+    const novaLista = [...lista];
+    novaLista.splice(i, 1);
+
+    setLista(novaLista);
+
+  }
 
   return (
     <div className='container'>
@@ -66,27 +70,27 @@ function App() {
         <div className='alta li'>
           <h2>Alta Prioridade</h2>
           {
-            lista.map(item => {
+            lista.map((item, i) => {
               if(item.prioridade == "Alta")
-                return <Item valor={item.descricao}></Item>
+                return <Item key={i} valor={item.descricao} remover={() => removerTarefa(i)}></Item>
             })
           }
         </div>
         <div className='media li'>
           <h2>Média Prioridade</h2>
           {
-            lista.map(item => {
+            lista.map((item, i) => {
               if(item.prioridade == "Média")
-                return <Item valor={item.descricao}></Item>
+                return <Item key={i} valor={item.descricao} remover={() => removerTarefa(i)}></Item>
             })
           }
         </div>
         <div className='baixa li'>
           <h2>Baixa Prioridade</h2>
           {
-            lista.map(item => {
+            lista.map((item, i) => {
               if(item.prioridade == "Baixa")
-                return <Item valor={item.descricao}></Item>
+                return <Item key={i} valor={item.descricao} remover={() => removerTarefa(i)}></Item>
             })
           }
         </div>

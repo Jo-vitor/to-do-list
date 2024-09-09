@@ -1,10 +1,13 @@
 import React from "react";
 
-const Item = (props) => {
+const Item = ({valor, remover}) => {
     return (
         <div className="item">
-            <input type='checkbox'></input>
-            <label>{props.valor}</label>
+            <div>
+                <input type='checkbox'></input>
+                <label>{valor}</label>
+            </div>
+            <button className="deleta borda" onClick={remover}>x</button>
         </div>
     );
     
